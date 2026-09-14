@@ -36,12 +36,9 @@ npm start
 
 The Express server will serve the built React app at `http://localhost:3001`.
 
-## Default Admin Login
+## Admin Account
 
-- **Username:** `shan`
-- **Password:** `[REDACTED]`
-
-Update the password after first login. Default credentials are created on first database init.
+The admin account is created on first database init. Sign in, then use **Admin → Security** to change your password. Credentials are intentionally not listed in this repo.
 
 ## Project Structure
 
@@ -228,8 +225,7 @@ The same full-stack app also deploys as a Pages project on `*.pages.dev`. Pages 
 
 ### First-run login
 
-- Username: `admin`
-- Password: `[REDACTED]` (change it immediately)```
+Sign in with the seeded admin account, then change the password from **Admin → Security**.
 
 ## Roadmap (Future Features)
 

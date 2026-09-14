@@ -21,6 +21,7 @@ import CategoriesAdminPage from './pages/admin/CategoriesAdminPage';
 import CollectionsAdminPage from './pages/admin/CollectionsAdminPage';
 import CollectionFormPage from './pages/admin/CollectionFormPage';
 import ImportExportPage from './pages/admin/ImportExportPage';
+import ChangePasswordPage from './pages/admin/ChangePasswordPage';
 
 function ProtectedRoute({ children }) {
   const { isAdmin, loading } = useAuth();
@@ -65,6 +66,7 @@ export default function App() {
         <Route path="collections/new" element={<CollectionFormPage />} />
         <Route path="collections/:id/edit" element={<CollectionFormPage />} />
         <Route path="import-export" element={<ImportExportPage />} />
+        <Route path="security" element={<ChangePasswordPage />} />
       </Route>
 
       <Route path="*" element={<Navigate to="/" replace />} />

@@ -1,4 +1,4 @@
-import { one } from '../db.js';
+import { one, run } from '../db.js';
 import { ok, fail, readBody } from '../util.js';
 import { bcrypt, signToken, parseCookies, serializeCookie } from '../auth.js';
 
@@ -46,6 +46,35 @@ export const routes = [
     admin: true,
     handler: async (ctx) => {
       return ok({ user: { id: ctx.user.id, username: ctx.user.username } });
+    },
+  },
+  {
+    method: 'POST',
+    path: '/api/auth/change-password',
+    admin: true,
+    handler: async (ctx) => {
+      const { db } = ctx;
+      const body = await readBody(ctx.request);
+      try {
+        const { current_password, new_password } = body || {};
+        if (!current_password || !new_password) {
+          return fail('Current and new password required', 400);
+        }
+        if (typeof new_password !== 'string' || new_password.length < 6) {
+          return fail('New password must be at least 6 characters', 400);
+        }
+
+        const admin = await one(db, 'SELECT * FROM admin WHERE id = ?', [ctx.user.id]);
+        if (!admin || !bcrypt.compareSync(current_password, admin.password_hash)) {
+          return fail('Current password is incorrect', 401);
+        }
+
+        const hash = bcrypt.hashSync(new_password, 10);
+        await run(db, 'UPDATE admin SET password_hash = ? WHERE id = ?', [hash, admin.id]);
+        return ok({ message: 'Password updated' });
+      } catch {
+        return fail('Password change failed', 500);
+      }
     },
   },
 ];

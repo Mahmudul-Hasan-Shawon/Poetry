@@ -43,4 +43,29 @@ router.get('/me', authMiddleware, (req, res) => {
   res.json({ user: req.user });
 });
 
+router.post('/change-password', authMiddleware, (req, res) => {
+  try {
+    const { current_password, new_password } = req.body || {};
+    if (!current_password || !new_password) {
+      return res.status(400).json({ error: 'Current and new password required' });
+    }
+    if (typeof new_password !== 'string' || new_password.length < 6) {
+      return res.status(400).json({ error: 'New password must be at least 6 characters' });
+    }
+
+    const db = getDb();
+    const admin = db.prepare('SELECT * FROM admin WHERE id = ?').get(req.user.id);
+
+    if (!admin || !bcrypt.compareSync(current_password, admin.password_hash)) {
+      return res.status(401).json({ error: 'Current password is incorrect' });
+    }
+
+    const hash = bcrypt.hashSync(new_password, 10);
+    db.prepare('UPDATE admin SET password_hash = ? WHERE id = ?').run(hash, admin.id);
+    res.json({ message: 'Password updated' });
+  } catch (err) {
+    res.status(500).json({ error: 'Password change failed' });
+  }
+});
+
 export default router;
