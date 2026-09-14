@@ -138,9 +138,18 @@ function initDb() {
 
   const adminCount = db.prepare('SELECT COUNT(*) as count FROM admin').get();
   if (adminCount.count === 0) {
-    const hash = bcrypt.hashSync('[REDACTED]', 10);
-    db.prepare('INSERT INTO admin (username, password_hash) VALUES (?, ?)').run('admin', hash);
-    console.log('Default admin created: admin / [REDACTED]');
+    const username = process.env.ADMIN_USERNAME;
+    const password = process.env.ADMIN_PASSWORD;
+    if (username && password) {
+      const hash = bcrypt.hashSync(password, 10);
+      db.prepare('INSERT INTO admin (username, password_hash) VALUES (?, ?)').run(username, hash);
+      console.log(`Admin created: ${username}`);
+    } else {
+      const generated = 'Admin' + Math.random().toString(36).slice(2, 10);
+      const hash = bcrypt.hashSync(generated, 10);
+      db.prepare('INSERT INTO admin (username, password_hash) VALUES (?, ?)').run('admin', hash);
+      console.log(`Admin created with temporary password: ${generated} (change it immediately)`);
+    }
   }
 
   seedCategories();
