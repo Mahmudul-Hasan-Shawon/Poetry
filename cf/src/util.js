@@ -57,4 +57,5 @@ export async function generateUniqueSlug(db, table, baseSlug, excludeId = null) 
   }
 }
 
-export { all, one, run } from './db.js';
+import { all, one, run } from './db.js';
+export { all, one, run };

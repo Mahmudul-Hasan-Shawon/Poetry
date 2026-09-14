@@ -35,12 +35,15 @@ export default {
       const method = request.method.toUpperCase();
       const user = await getUser(request, env);
 
+      let methodMismatch = false;
+
       for (const route of ALL_ROUTES) {
         const params = parseParams(route.path, url.pathname);
         if (!params) continue;
 
         if (route.method !== method) {
-          return fail('Method not allowed', 405);
+          methodMismatch = true;
+          continue;
         }
         if (route.admin && !user) {
           return fail('Authentication required', 401);
@@ -64,7 +67,7 @@ export default {
         }
       }
 
-      return fail('Not found', 404);
+      return methodMismatch ? fail('Method not allowed', 405) : fail('Not found', 404);
     }
 
     const asset = await env.ASSETS.fetch(request);

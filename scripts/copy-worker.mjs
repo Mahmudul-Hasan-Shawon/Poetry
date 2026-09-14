@@ -1,4 +1,4 @@
-import { copyFileSync, mkdirSync } from 'node:fs';
+import { copyFileSync, mkdirSync, writeFileSync } from 'node:fs';
 import { join, dirname } from 'node:path';
 import { fileURLToPath } from 'node:url';
 
@@ -8,4 +8,5 @@ const dist = join(root, 'client', 'dist');
 
 mkdirSync(dist, { recursive: true });
 copyFileSync(workerBundle, join(dist, '_worker.js'));
+writeFileSync(join(dist, '.assetsignore'), '_worker.js', 'utf8');
 console.log('Copied _worker.js into client/dist');
