@@ -38,7 +38,7 @@ The Express server will serve the built React app at `http://localhost:3001`.
 
 ## Default Admin Login
 
-- **Username:** `admin`
+- **Username:** `shan`
 - **Password:** `[REDACTED]`
 
 Update the password after first login. Default credentials are created on first database init.
