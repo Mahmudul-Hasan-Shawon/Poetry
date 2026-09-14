@@ -1,0 +1,21 @@
+{
+  "name": "poetry-archive-cf",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "deploy": "cd ../client && npm run build && cd ../cf && wrangler deploy",
+    "bundle:worker": "esbuild src/index.js --bundle --format=esm --platform=browser --target=es2022 --minify --outfile=worker-bundle/_worker.js",
+    "dev": "cd ../client && npm run build && cd ../cf && wrangler dev",
+    "db:schema": "wrangler d1 execute poetry --file=schema.sql",
+    "db:seed": "wrangler d1 execute poetry --file=seed.sql"
+  },
+  "dependencies": {
+    "bcryptjs": "^2.4.3",
+    "jose": "^5.9.6"
+  },
+  "devDependencies": {
+    "esbuild": "^0.28.2",
+    "wrangler": "^4.7.0"
+  }
+}

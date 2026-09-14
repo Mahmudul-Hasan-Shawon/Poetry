@@ -20,10 +20,11 @@ router.post('/login', (req, res) => {
     }
 
     const token = generateToken(admin);
+    const sameSite = process.env.COOKIE_SAMESITE || 'lax';
     res.cookie('auth_token', token, {
       httpOnly: true,
-      secure: process.env.NODE_ENV === 'production',
-      sameSite: 'lax',
+      secure: process.env.NODE_ENV === 'production' || sameSite === 'none',
+      sameSite,
       maxAge: 7 * 24 * 60 * 60 * 1000,
     });
 

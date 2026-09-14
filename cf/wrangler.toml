@@ -1,0 +1,15 @@
+name = "versevision"
+main = "src/index.js"
+compatibility_date = "2026-09-01"
+compatibility_flags = ["nodejs_compat"]
+
+[assets]
+directory = "../client/dist"
+binding = "ASSETS"
+not_found_handling = "none"
+run_worker_first = false
+
+[[d1_databases]]
+binding = "DB"
+database_name = "poetry"
+database_id = "0cb3e967-00bb-460f-83e5-5f6f05cf3221"

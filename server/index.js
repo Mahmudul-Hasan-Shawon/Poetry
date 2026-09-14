@@ -33,6 +33,10 @@ app.use('/api/search', searchRoutes);
 app.use('/api/analytics', analyticsRoutes);
 app.use('/api/export', exportRoutes);
 
+app.get('/api/health', (req, res) => {
+  res.json({ status: 'ok' });
+});
+
 const clientDist = join(__dirname, '..', 'client', 'dist');
 app.use(express.static(clientDist));
 app.get('*', (req, res) => {
