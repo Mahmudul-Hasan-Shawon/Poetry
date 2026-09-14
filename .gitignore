@@ -1,0 +1,10 @@
+node_modules/
+dist/
+*.log
+.DS_Store
+.env
+.env.local
+server/db/poetry.db
+server/db/poetry.db-wal
+server/db/poetry.db-shm
+server/uploads/

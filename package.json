@@ -1,0 +1,18 @@
+{
+  "name": "poetry-archive",
+  "version": "1.0.0",
+  "private": true,
+  "description": "A quiet digital library of human thought",
+  "scripts": {
+    "dev": "concurrently \"npm run server\" \"npm run client\"",
+    "dev:lan": "concurrently \"npm run server\" \"npm run client -- -- --host\"",
+    "client": "cd client && npm run dev",
+    "server": "cd server && node index.js",
+    "build": "cd client && npm run build",
+    "start": "cd server && node index.js",
+    "setup": "npm install && cd client && npm install && cd ../server && npm install"
+  },
+  "devDependencies": {
+    "concurrently": "^8.2.2"
+  }
+}
