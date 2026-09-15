@@ -142,7 +142,7 @@ export default function QuotePage() {
                           : 'text-ink-500'
                       }`}>
                         {writing.verification_status === 'verified' && (
-                          <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" />
+                          <img src="/Icons/verified.png" alt="" className="w-5 h-5 object-contain" />
                         )}
                         {writing.verification_status}
                       </span>
