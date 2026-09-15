@@ -18,15 +18,26 @@ export default function WritingFormPage() {
   const [newAuthorName, setNewAuthorName] = useState('');
   const [preview, setPreview] = useState(false);
   const [authorOpen, setAuthorOpen] = useState(false);
+  const [authorSearch, setAuthorSearch] = useState('');
   const authorRef = useRef(null);
+
+  const filteredAuthors = authorSearch.trim()
+    ? authors.filter((a) => a.name.toLowerCase().includes(authorSearch.trim().toLowerCase()))
+    : authors;
 
   useEffect(() => {
     if (!authorOpen) return;
     const onPointerDown = (e) => {
-      if (authorRef.current && !authorRef.current.contains(e.target)) setAuthorOpen(false);
+      if (authorRef.current && !authorRef.current.contains(e.target)) {
+        setAuthorOpen(false);
+        setAuthorSearch('');
+      }
     };
     const onKey = (e) => {
-      if (e.key === 'Escape') setAuthorOpen(false);
+      if (e.key === 'Escape') {
+        setAuthorOpen(false);
+        setAuthorSearch('');
+      }
     };
     document.addEventListener('mousedown', onPointerDown);
     document.addEventListener('keydown', onKey);
@@ -214,25 +225,35 @@ export default function WritingFormPage() {
                   </svg>
                 </button>
                 {authorOpen && (
-                  <div className="absolute left-0 right-0 top-full mt-1 z-30 max-h-64 overflow-y-auto bg-ink-950 border border-ink-700 rounded-sm shadow-xl">
-                    {authors.length === 0 ? (
-                      <p className="px-4 py-3 text-sm text-ink-500">No authors yet</p>
-                    ) : (
-                      authors.map((a) => (
-                        <button
-                          key={a.id}
-                          type="button"
-                          onClick={() => { update('author_id', a.id); setAuthorOpen(false); }}
-                          className={`block w-full text-left px-4 py-2.5 text-sm whitespace-nowrap overflow-hidden text-ellipsis transition-colors ${
-                            form.author_id == a.id
-                              ? 'bg-gold-500/15 text-gold-400'
-                              : 'text-ink-300 hover:bg-ink-800/60 hover:text-gold-400'
-                          }`}
-                        >
-                          {a.name}
-                        </button>
-                      ))
-                    )}
+                  <div className="absolute left-0 right-0 top-full mt-1 z-30 bg-ink-950 border border-ink-700 rounded-sm shadow-xl">
+                    <input
+                      type="text"
+                      value={authorSearch}
+                      onChange={(e) => setAuthorSearch(e.target.value)}
+                      placeholder="Search authors..."
+                      className="input-field rounded-none border-0 border-b border-ink-700 focus:ring-0"
+                      autoFocus
+                    />
+                    <div className="max-h-48 overflow-y-auto">
+                      {filteredAuthors.length === 0 ? (
+                        <p className="px-4 py-3 text-sm text-ink-500">No authors found</p>
+                      ) : (
+                        filteredAuthors.map((a) => (
+                          <button
+                            key={a.id}
+                            type="button"
+                            onClick={() => { update('author_id', a.id); setAuthorOpen(false); setAuthorSearch(''); }}
+                            className={`block w-full text-left px-4 py-2.5 text-sm whitespace-nowrap overflow-hidden text-ellipsis transition-colors ${
+                              form.author_id == a.id
+                                ? 'bg-gold-500/15 text-gold-400'
+                                : 'text-ink-300 hover:bg-ink-800/60 hover:text-gold-400'
+                            }`}
+                          >
+                            {a.name}
+                          </button>
+                        ))
+                      )}
+                    </div>
                   </div>
                 )}
               </div>
