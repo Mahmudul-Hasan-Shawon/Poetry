@@ -239,7 +239,7 @@ export default function PublicLayout() {
         <Outlet />
       </main>
 
-      <footer className="relative z-10 border-t border-ink-800/30 mt-32 overflow-hidden">
+      <footer className="relative z-10 overflow-hidden mt-16">
         <div className="max-w-7xl mx-auto px-6 pt-20 pb-12">
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 border-t border-ink-800/30 pt-16">
