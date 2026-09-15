@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { apiWritings, apiAuthors, apiCategories, apiCollections } from '../../api/client';
 import { WRITING_TYPES, LANGUAGES, STATUSES, VERIFICATION_STATUSES, friendlyDate, toInputDate } from '../../utils/helpers';
@@ -17,6 +17,24 @@ export default function WritingFormPage() {
   const [showNewAuthor, setShowNewAuthor] = useState(false);
   const [newAuthorName, setNewAuthorName] = useState('');
   const [preview, setPreview] = useState(false);
+  const [authorOpen, setAuthorOpen] = useState(false);
+  const authorRef = useRef(null);
+
+  useEffect(() => {
+    if (!authorOpen) return;
+    const onPointerDown = (e) => {
+      if (authorRef.current && !authorRef.current.contains(e.target)) setAuthorOpen(false);
+    };
+    const onKey = (e) => {
+      if (e.key === 'Escape') setAuthorOpen(false);
+    };
+    document.addEventListener('mousedown', onPointerDown);
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('mousedown', onPointerDown);
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [authorOpen]);
 
   const [form, setForm] = useState({
     author_id: '',
@@ -179,12 +197,45 @@ export default function WritingFormPage() {
           <Item y={0}>
             <label className="font-body text-xs text-ink-400 uppercase tracking-wider mb-2 block">Author</label>
             <div className="flex gap-3">
-              <select value={form.author_id} onChange={(e) => update('author_id', e.target.value)} className="select-field flex-1">
-                <option value="">Select Author</option>
-                {authors.map((a) => (
-                  <option key={a.id} value={a.id}>{a.name}</option>
-                ))}
-              </select>
+              <div ref={authorRef} className="relative flex-1">
+                <button
+                  type="button"
+                  onClick={() => setAuthorOpen(!authorOpen)}
+                  className={`select-field flex items-center justify-between gap-2 text-left ${form.author_id ? '' : 'text-ink-600'}`}
+                >
+                  <span className="overflow-hidden text-ellipsis whitespace-nowrap">
+                    {form.author_id ? (authors.find((a) => a.id == form.author_id)?.name || 'Select Author') : 'Select Author'}
+                  </span>
+                  <svg
+                    className={`w-4 h-4 shrink-0 transition-transform duration-200 ${authorOpen ? 'rotate-180' : ''}`}
+                    fill="none" stroke="currentColor" viewBox="0 0 24 24"
+                  >
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                  </svg>
+                </button>
+                {authorOpen && (
+                  <div className="absolute left-0 right-0 top-full mt-1 z-30 max-h-64 overflow-y-auto bg-ink-950 border border-ink-700 rounded-sm shadow-xl">
+                    {authors.length === 0 ? (
+                      <p className="px-4 py-3 text-sm text-ink-500">No authors yet</p>
+                    ) : (
+                      authors.map((a) => (
+                        <button
+                          key={a.id}
+                          type="button"
+                          onClick={() => { update('author_id', a.id); setAuthorOpen(false); }}
+                          className={`block w-full text-left px-4 py-2.5 text-sm whitespace-nowrap overflow-hidden text-ellipsis transition-colors ${
+                            form.author_id == a.id
+                              ? 'bg-gold-500/15 text-gold-400'
+                              : 'text-ink-300 hover:bg-ink-800/60 hover:text-gold-400'
+                          }`}
+                        >
+                          {a.name}
+                        </button>
+                      ))
+                    )}
+                  </div>
+                )}
+              </div>
               <button type="button" onClick={() => setShowNewAuthor(!showNewAuthor)} className="btn-secondary text-xs whitespace-nowrap">
                 + New Author
               </button>
