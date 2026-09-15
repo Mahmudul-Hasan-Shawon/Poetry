@@ -75,7 +75,7 @@ export default function CollectionPage() {
           </div>
         ) : (
           <div className="text-center py-20">
-            <p className="font-display text-2xl text-ink-400 italic">This collection is empty</p>
+            <p className="font-display text-2xl text-ink-400">This collection is empty</p>
           </div>
         )}
       </div>

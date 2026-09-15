@@ -83,7 +83,7 @@ export default function HomePage() {
             <h1 className="font-display text-5xl md:text-7xl lg:text-8xl font-light text-ink-100 leading-[1.1] mb-8">
               Words That
               <br />
-              <span className="italic text-gold-400">Outlive</span> Time
+              <span className="text-gold-400">Outlive</span> Time
             </h1>
 
             <p className="font-body text-lg md:text-xl text-ink-400 max-w-2xl mx-auto mb-12 leading-relaxed">
@@ -156,7 +156,7 @@ export default function HomePage() {
 
               <blockquote className={`${daily.language === 'bangla' ? 'font-bangla' : 'font-display'} text-2xl md:text-4xl lg:text-5xl font-light leading-relaxed text-ink-100 mb-8 ${daily.direction === 'rtl' ? 'writing-rtl' : ''}`}>
                 <span className="text-gold-500/30 text-6xl">"</span>
-                <span className="italic whitespace-pre-line">{daily.text}</span>
+                <span className="whitespace-pre-line">{daily.text}</span>
                 <span className="text-gold-500/30 text-6xl">"</span>
               </blockquote>
 

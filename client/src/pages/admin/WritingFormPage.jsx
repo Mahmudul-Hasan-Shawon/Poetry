@@ -160,7 +160,7 @@ export default function WritingFormPage() {
         <Item className="p-12 bg-ink-900/30 border border-ink-800/30 rounded-sm">
           {form.title && <h2 className="font-display text-2xl text-ink-100 mb-6 text-center">{form.title}</h2>}
           <blockquote className={`text-center mb-8 ${form.direction === 'rtl' ? 'writing-rtl' : ''}`}>
-            <p className={`${form.language === 'bangla' ? 'font-bangla' : 'font-display'} text-2xl md:text-3xl italic leading-relaxed text-ink-100 whitespace-pre-line`}>
+            <p className={`${form.language === 'bangla' ? 'font-bangla' : 'font-display'} text-2xl md:text-3xl leading-relaxed text-ink-100 whitespace-pre-line`}>
               {form.text || 'No text entered'}
             </p>
           </blockquote>

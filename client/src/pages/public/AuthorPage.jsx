@@ -111,7 +111,7 @@ export default function AuthorPage() {
 
         {writings.length === 0 && (
           <div className="text-center py-20">
-            <p className="font-display text-2xl text-ink-400 italic">No writings yet</p>
+            <p className="font-display text-2xl text-ink-400">No writings yet</p>
           </div>
         )}
       </div>

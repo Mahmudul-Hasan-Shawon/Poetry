@@ -97,7 +97,7 @@ export default function QuotePage() {
               )}
 
               <blockquote className={`text-center mb-12 ${isRTL ? 'writing-rtl' : ''}`}>
-                <p className={`${isBangla ? 'font-bangla' : 'font-display'} text-lg md:text-xl lg:text-2xl font-light leading-relaxed text-ink-100 italic whitespace-pre-line`}>
+                <p className={`${isBangla ? 'font-bangla' : 'font-display'} text-lg md:text-xl lg:text-2xl font-light leading-relaxed text-ink-100 whitespace-pre-line`}>
                   {writing.text}
                 </p>
               </blockquote>
@@ -120,31 +120,21 @@ export default function QuotePage() {
 
                 {/* Metadata line */}
                 <div className="flex flex-wrap items-center justify-center gap-x-2.5 gap-y-1 text-ink-500 text-center">
-                  {writing.source && (
-                    <span className="font-body text-xs italic">{writing.source}</span>
-                  )}
-                  {writing.date && (
-                    <>
-                      {writing.source && <span className="text-ink-700">·</span>}
-                      <span className="font-body text-xs">{writing.date}</span>
-                    </>
-                  )}
-                  {writing.type && (
-                    <>
-                      <span className="text-ink-700">·</span>
-                      <span className="font-body text-xs capitalize">{writing.type}</span>
-                    </>
-                  )}
-                  {writing.language && (
-                    <>
-                      <span className="text-ink-700">·</span>
-                      <span className="font-body text-xs capitalize">{writing.language}</span>
-                    </>
-                  )}
-                  {writing.verification_status && (
-                    <>
-                      <span className="text-ink-700">·</span>
-                      <span className={`font-body text-xs capitalize inline-flex items-center gap-1.5 ${
+                  {[
+                    writing.source && (
+                      <span key="source" className="font-body text-xs">{writing.source}</span>
+                    ),
+                    writing.date && (
+                      <span key="date" className="font-body text-xs">{writing.date}</span>
+                    ),
+                    writing.type && (
+                      <span key="type" className="font-body text-xs capitalize">{writing.type}</span>
+                    ),
+                    writing.language && (
+                      <span key="language" className="font-body text-xs capitalize">{writing.language}</span>
+                    ),
+                    writing.verification_status && (
+                      <span key="verification" className={`font-body text-xs capitalize inline-flex items-center gap-1.5 ${
                         writing.verification_status === 'verified'
                           ? 'text-emerald-400'
                           : writing.verification_status === 'attributed'
@@ -156,8 +146,15 @@ export default function QuotePage() {
                         )}
                         {writing.verification_status}
                       </span>
-                    </>
-                  )}
+                    ),
+                  ]
+                    .filter(Boolean)
+                    .map((segment, i) => (
+                      <span key={segment.key} className="inline-flex items-center gap-x-2.5">
+                        {i > 0 && <span className="text-ink-700">·</span>}
+                        {segment.props.children}
+                      </span>
+                    ))}
                 </div>
 
                 {/* Categories */}
@@ -179,7 +176,7 @@ export default function QuotePage() {
                 {writing.english_translation && writing.language !== 'english' && (
                   <div className="mt-8 p-6 bg-ink-900/30 border border-ink-800/30 rounded-sm max-w-2xl">
                     <span className="font-body text-xs text-ink-500 uppercase tracking-wider block mb-3">English Translation</span>
-                    <p className="font-display text-lg italic text-ink-200 leading-relaxed whitespace-pre-line">
+                    <p className="font-display text-lg text-ink-200 leading-relaxed whitespace-pre-line">
                       {writing.english_translation}
                     </p>
                   </div>
@@ -188,7 +185,7 @@ export default function QuotePage() {
                 {writing.bangla_translation && (
                   <div className="mt-4 p-6 bg-ink-900/30 border border-ink-800/30 rounded-sm max-w-2xl">
                     <span className="font-body text-xs text-ink-500 uppercase tracking-wider block mb-3">Bangla Translation</span>
-                    <p className="font-bangla text-lg italic text-ink-200 leading-relaxed whitespace-pre-line">
+                    <p className="font-bangla text-lg text-ink-200 leading-relaxed whitespace-pre-line">
                       {writing.bangla_translation}
                     </p>
                   </div>

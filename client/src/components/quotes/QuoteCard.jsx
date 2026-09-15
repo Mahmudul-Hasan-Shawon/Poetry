@@ -73,7 +73,7 @@ export default function QuoteCard({ writing, index = 0 }) {
                 <div className="mt-2 w-12 h-px bg-gradient-to-r from-gold-500/50 to-transparent" />
               </header>
             )}
-            <p className={`${isBangla ? 'font-bangla' : 'font-display'} text-xl md:text-[1.35rem] leading-relaxed text-ink-100 italic whitespace-pre-line line-clamp-6`}>
+            <p className={`${isBangla ? 'font-bangla' : 'font-display'} text-xl md:text-[1.35rem] leading-relaxed text-ink-100 whitespace-pre-line line-clamp-6`}>
               {displayText}
             </p>
           </div>

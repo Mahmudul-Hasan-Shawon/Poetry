@@ -59,7 +59,7 @@ export default function CollectionsPage() {
 
         {collections.length === 0 ? (
           <div className="text-center py-20">
-            <p className="font-display text-2xl text-ink-400 italic">No collections yet</p>
+            <p className="font-display text-2xl text-ink-400">No collections yet</p>
           </div>
         ) : (
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">

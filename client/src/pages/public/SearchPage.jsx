@@ -168,7 +168,7 @@ export default function SearchPage() {
             {/* No results */}
             {results.writings?.length === 0 && results.authors?.length === 0 && (
               <div className="text-center py-20">
-                <p className="font-display text-2xl text-ink-400 italic">No results found</p>
+                <p className="font-display text-2xl text-ink-400">No results found</p>
                 <p className="font-body text-sm text-ink-500 mt-2">Try a different search term</p>
               </div>
             )}
@@ -177,7 +177,7 @@ export default function SearchPage() {
 
         {!q && !loading && (
           <div className="text-center py-20">
-            <p className="font-display text-xl text-ink-400 italic">
+            <p className="font-display text-xl text-ink-400">
               Begin typing to discover words of wisdom...
             </p>
           </div>

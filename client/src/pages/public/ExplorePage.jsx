@@ -202,7 +202,7 @@ export default function ExplorePage() {
           <div className="mt-5 pt-4 border-t border-ink-800/40 flex flex-wrap items-center justify-between gap-3">
             <div className="flex flex-wrap items-center gap-2">
               {!hasFilters && (
-                <span className="font-body text-xs italic text-ink-600">Showing everything — refine with the filters above</span>
+                <span className="font-body text-xs text-ink-600">Showing everything — refine with the filters above</span>
               )}
               {activeType && (
                 <span className="font-body text-xs inline-flex items-center gap-2 bg-gold-500/15 text-gold-400 border border-gold-500/25 rounded-sm px-3 py-1">
@@ -247,7 +247,7 @@ export default function ExplorePage() {
           </div>
         ) : writings.length === 0 ? (
           <div className="text-center py-20">
-            <p className="font-display text-2xl text-ink-400 italic">No writings found</p>
+            <p className="font-display text-2xl text-ink-400">No writings found</p>
             <p className="font-body text-sm text-ink-500 mt-2">Try adjusting your filters or search term</p>
           </div>
         ) : (
