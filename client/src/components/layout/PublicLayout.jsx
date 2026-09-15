@@ -316,11 +316,11 @@ export default function PublicLayout() {
                 <p className="font-body text-xs text-ink-600 flex items-center gap-1.5">
                   Powered by
                   <a href="https://mhshan.pages.dev/" target="_blank" rel="noopener" className="inline-flex items-center hover:opacity-80 transition-opacity">
-                    <img
-                      src="/Images/logo/shawon_logo.svg"
-                      alt="Shawon"
-                      className="h-4 w-auto object-contain"
-                    />
+<img
+                    src="/Images/logo/shawon_logo.svg"
+                    alt="Shawon"
+                    className="h-8 w-auto object-contain"
+                  />
                   </a>
                 </p>
               </div>

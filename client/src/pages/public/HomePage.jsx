@@ -46,8 +46,23 @@ export default function HomePage() {
       {/* Hero */}
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
         <div className="absolute inset-0">
-          <img src="/Images/hero/hero.png" alt="" className="hidden md:block absolute inset-0 w-full h-full object-cover" />
-          <img src="/Images/hero/mobilehereo.png" alt="" className="md:hidden absolute inset-0 w-full h-full object-cover" />
+          <picture>
+            <source
+              media="(min-width: 768px)"
+              srcSet="/Images/hero/hero-wide-3840w.webp 3840w, /Images/hero/hero-wide-2560w.webp 2560w, /Images/hero/hero-wide-1920w.webp 1920w"
+              sizes="100vw"
+              type="image/webp"
+            />
+            <source
+              media="(min-width: 768px)"
+              srcSet="/Images/hero/hero-wide-2560w.jpg"
+              sizes="100vw"
+              type="image/jpeg"
+            />
+            <source srcSet="/Images/hero/hero-mobile-1080x1920.webp" type="image/webp" />
+            <source srcSet="/Images/hero/hero-mobile-1080x1920.jpg" type="image/jpeg" />
+            <img src="/Images/hero/hero-wide-2560w.jpg" alt="" className="absolute inset-0 w-full h-full object-cover" />
+          </picture>
           <div className="absolute inset-0 bg-gradient-to-b from-ink-950 via-ink-950/80 to-ink-950" />
           <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-gold-500/5 rounded-full blur-3xl" />
           <div className="absolute bottom-1/4 right-1/4 w-96 h-96 bg-gold-600/3 rounded-full blur-3xl" />
