@@ -262,51 +262,53 @@ export default function PublicLayout() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 border-t border-ink-800/30 pt-16">
             <div>
-              <div className="flex items-center mb-5">
+              <div className="flex items-center justify-center mb-5">
                 <img
                   src="/Images/logo/logo.svg"
                   alt="The Poetry Archive"
                   className="h-12 w-auto object-contain"
                 />
               </div>
-              <p className="font-body text-sm text-ink-500 leading-relaxed max-w-xs">
+              <p className="font-body text-sm text-ink-500 leading-relaxed max-w-xs mx-auto text-center">
                 A quiet digital library of human thought. Poetry, wisdom, and writings from the world's greatest poets and thinkers.
               </p>
-              <div className="flex items-center gap-2 mt-5">
-                <svg className="w-4 h-4 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-                <span className="font-body text-sm text-ink-400">Dhaka, Bangladesh</span>
-              </div>
             </div>
 
-            <div>
-              <h3 className="font-body text-xs uppercase tracking-widest text-gold-500 mb-5">Explore</h3>
-              <div className="space-y-3">
-                {navLinks.map((link) => (
+            <div className="grid grid-cols-[auto_1fr] md:contents gap-12">
+              <div>
+                <h3 className="font-body text-xs uppercase tracking-widest text-gold-500 mb-5">Explore</h3>
+                <div className="space-y-3">
+                  {navLinks.map((link) => (
+                    <Link
+                      key={link.to}
+                      to={link.to}
+                      className="block font-body text-sm text-ink-400 hover:text-gold-400 transition-colors duration-300 w-fit"
+                    >
+                      {link.label}
+                    </Link>
+                  ))}
                   <Link
-                    key={link.to}
-                    to={link.to}
+                    to="/search"
                     className="block font-body text-sm text-ink-400 hover:text-gold-400 transition-colors duration-300 w-fit"
                   >
-                    {link.label}
+                    Search
                   </Link>
-                ))}
-                <Link
-                  to="/search"
-                  className="block font-body text-sm text-ink-400 hover:text-gold-400 transition-colors duration-300 w-fit"
-                >
-                  Search
-                </Link>
+                </div>
               </div>
-            </div>
 
-            <div>
-              <h3 className="font-body text-xs uppercase tracking-widest text-gold-500 mb-5">About</h3>
-              <p className="font-body text-sm text-ink-500 leading-relaxed">
-                Dedicated to preserving the timeless words of poets, philosophers, and thinkers across cultures and centuries — a home for quiet reflection and enduring verse.
-              </p>
+              <div>
+                <h3 className="font-body text-xs uppercase tracking-widest text-gold-500 mb-5">About</h3>
+                <p className="font-body text-sm text-ink-500 leading-relaxed">
+                  Dedicated to preserving the timeless words of poets, philosophers, and thinkers across cultures and centuries — a home for quiet reflection and enduring verse.
+                </p>
+                <div className="flex items-center gap-2 mt-5">
+                  <svg className="w-4 h-4 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
+                  </svg>
+                  <span className="font-body text-sm text-ink-400">Dhaka, Bangladesh</span>
+                </div>
+              </div>
             </div>
           </div>
 
