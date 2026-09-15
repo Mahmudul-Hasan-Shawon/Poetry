@@ -38,7 +38,7 @@ export default function AuthorsAdminPage() {
         <Link to="/admin/authors/new" className="btn-primary text-xs">+ New Author</Link>
       </Item>
 
-      <div className="overflow-auto max-h-[calc(100vh-15rem)] border border-ink-800/30">
+      <div data-lenis-prevent className="overflow-auto max-h-[calc(100vh-15rem)] border border-ink-800/30">
         <Stagger delay={0.1}>
           <table className="admin-table">
           <thead>

@@ -34,7 +34,7 @@ export default function CollectionsAdminPage() {
         <Link to="/admin/collections/new" className="btn-primary text-xs">+ New Collection</Link>
       </Item>
 
-      <div className="space-y-3 overflow-auto max-h-[calc(100vh-15rem)] pr-1">
+      <div data-lenis-prevent className="space-y-3 overflow-auto max-h-[calc(100vh-15rem)] pr-1">
         {collections.map((col) => (
           <Item key={col.id} className="flex items-center justify-between p-4 bg-ink-900/30 border border-ink-800/30 rounded-sm">
             <div>

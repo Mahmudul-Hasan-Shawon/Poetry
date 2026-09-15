@@ -1,6 +1,7 @@
 import { createContext, useCallback, useContext, useEffect, useRef } from 'react';
 import { useNavigate } from 'react-router-dom';
 import gsap from 'gsap';
+import { useLenis, useLenisScroll } from './LenisProvider';
 
 const VeilContext = createContext(null);
 
@@ -17,6 +18,18 @@ export default function VeilTransition({ children }) {
   const transitioning = useRef(false);
   const activeTimeline = useRef(null);
   const navigate = useNavigate();
+  const lenis = useLenis();
+  const { scrollTo, scrollTopInstant } = useLenisScroll();
+
+  const scrollToHash = useCallback(
+    (url) => {
+      if (!url.hash) return;
+      const id = decodeURIComponent(url.hash.slice(1));
+      const el = document.getElementById(id);
+      if (el) scrollTo(el, { duration: 1.2, offset: 0 });
+    },
+    [scrollTo]
+  );
 
   const go = useCallback(
     (target) => {
@@ -27,19 +40,11 @@ export default function VeilTransition({ children }) {
       const current = pathKey(window.location.pathname, window.location.search);
       const destination = pathKey(url.pathname, url.search);
 
-      const hasHash = !!url.hash;
-      const scrollToHash = () => {
-        if (!hasHash) return;
-        const id = decodeURIComponent(url.hash.slice(1));
-        const el = document.getElementById(id);
-        if (el) el.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      };
-
       // In-page hash on the same path: smooth-scroll, never run the veil.
       if (destination === current) {
-        if (hasHash) {
+        if (url.hash) {
           window.history.replaceState({}, '', to);
-          scrollToHash();
+          scrollToHash(url);
         }
         return;
       }
@@ -47,14 +52,15 @@ export default function VeilTransition({ children }) {
       // Respect prefers-reduced-motion: swap instantly.
       if (isReducedMotion()) {
         navigate(to);
-        if (hasHash) scrollToHash();
-        else window.scrollTo(0, 0);
+        if (url.hash) scrollToHash(url);
+        else scrollTopInstant();
         return;
       }
 
       transitioning.current = true;
-      const veil = veilRef.current;
+      lenis?.stop();
 
+      const veil = veilRef.current;
       const tl = gsap.timeline();
       activeTimeline.current = tl;
 
@@ -66,8 +72,8 @@ export default function VeilTransition({ children }) {
         )
         .add(() => {
           navigate(to);
-          if (hasHash) gsap.delayedCall(0.05, scrollToHash);
-          else window.scrollTo(0, 0);
+          if (url.hash) gsap.delayedCall(0.05, () => scrollToHash(url));
+          else scrollTopInstant();
         })
         .to(veil, {
           clipPath: 'inset(0 0 100% 0)',
@@ -78,11 +84,12 @@ export default function VeilTransition({ children }) {
         .set(veil, { visibility: 'hidden', clipPath: 'inset(100% 0 0 0)' });
 
       tl.eventCallback('onComplete', () => {
+        lenis?.start();
         activeTimeline.current = null;
         transitioning.current = false;
       });
     },
-    [navigate]
+    [navigate, lenis, scrollTo, scrollTopInstant, scrollToHash]
   );
 
   // Back/forward: the router swaps instantly — just cancel any in-flight wipe.
@@ -90,6 +97,7 @@ export default function VeilTransition({ children }) {
     const onPopState = () => {
       if (activeTimeline.current) {
         activeTimeline.current.kill();
+        lenis?.start();
         activeTimeline.current = null;
         transitioning.current = false;
         const veil = veilRef.current;
@@ -98,7 +106,7 @@ export default function VeilTransition({ children }) {
     };
     window.addEventListener('popstate', onPopState);
     return () => window.removeEventListener('popstate', onPopState);
-  }, []);
+  }, [lenis]);
 
   // Intercept internal anchor clicks in the capture phase so our preventDefault
   // runs before react-router's Link handler (which skips nav when defaultPrevented).

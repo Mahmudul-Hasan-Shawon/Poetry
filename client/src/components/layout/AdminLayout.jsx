@@ -1,7 +1,8 @@
 import { Link, useLocation, useNavigate, Outlet } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { useState, useRef, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { Stagger, Item } from '../ui/motion.jsx';
+import { useLenisScroll } from '../ui/LenisProvider';
 
 const sidebarLinks = [
   { to: '/admin', label: 'Dashboard', exact: true, icon: 'M3 12l2-2m0 0l7-7 7 7M5 10v10a1 1 0 001 1h3m10-11l2 2m-2-2v10a1 1 0 01-1 1h-3m-6 0a1 1 0 001-1v-4a1 1 0 011-1h2a1 1 0 011 1v4a1 1 0 001 1m-6 0h6' },
@@ -18,12 +19,12 @@ export default function AdminLayout() {
   const location = useLocation();
   const navigate = useNavigate();
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const mainRef = useRef(null);
+  const { scrollTopInstant } = useLenisScroll();
 
-  // Reset the scrollable admin area to the top on navigation
+  // Reset scroll to top on navigation
   useEffect(() => {
-    if (mainRef.current) mainRef.current.scrollTop = 0;
-  }, [location.pathname]);
+    scrollTopInstant();
+  }, [location.pathname]); // eslint-disable-line react-hooks/exhaustive-deps
 
   const handleLogout = async () => {
     await logout();
@@ -35,9 +36,9 @@ export default function AdminLayout() {
   };
 
   return (
-    <Stagger className="h-screen overflow-hidden bg-ink-950 flex">
+    <Stagger className="min-h-screen bg-ink-950 flex">
       <aside
-        className={`fixed inset-y-0 left-0 z-40 w-64 bg-ink-900 border-r border-ink-800/50 transform transition-transform duration-300 lg:translate-x-0 lg:static lg:z-auto ${
+        className={`fixed inset-y-0 left-0 z-40 w-64 bg-ink-900 border-r border-ink-800/50 transform transition-transform duration-300 lg:translate-x-0 ${
           sidebarOpen ? 'translate-x-0' : '-translate-x-full'
         }`}
       >
@@ -108,7 +109,7 @@ export default function AdminLayout() {
         />
       )}
 
-      <div className="flex-1 flex flex-col min-w-0 h-screen overflow-hidden">
+      <div className="flex-1 flex flex-col min-w-0 min-h-screen lg:ml-64">
         <header className="sticky top-0 z-20 bg-ink-950/80 backdrop-blur-md border-b border-ink-800/30 px-6 h-14 flex items-center justify-between">
           <button
             onClick={() => setSidebarOpen(true)}
@@ -132,7 +133,7 @@ export default function AdminLayout() {
           </div>
         </header>
 
-        <main ref={mainRef} className="flex-1 p-6 lg:p-8 overflow-y-auto overscroll-contain">
+        <main className="flex-1 p-6 lg:p-8">
           <Item y={0}>
             <Outlet />
           </Item>

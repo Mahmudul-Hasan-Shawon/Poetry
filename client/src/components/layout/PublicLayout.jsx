@@ -1,6 +1,7 @@
 import { Link, useLocation, Outlet } from 'react-router-dom';
 import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { useLenis, useLenisScroll } from '../ui/LenisProvider';
 
 const navLinks = [
   { to: '/', label: 'Home' },
@@ -14,6 +15,8 @@ export default function PublicLayout() {
   const [hidden, setHidden] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
+  const lenis = useLenis();
+  const { scrollTo, scrollTopInstant } = useLenisScroll();
 
   useEffect(() => {
     setMobileOpen(false);
@@ -21,14 +24,15 @@ export default function PublicLayout() {
 
   // Reset scroll to top on navigation
   useEffect(() => {
-    window.scrollTo(0, 0);
+    scrollTopInstant();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [location.pathname]);
 
   const handleLogoClick = (e) => {
     setMobileOpen(false);
     if (location.pathname === '/') {
       e.preventDefault();
-      window.scrollTo({ top: 0, behavior: 'smooth' });
+      scrollTo(0, { duration: 1.2 });
     }
   };
 
@@ -53,12 +57,14 @@ export default function PublicLayout() {
   useEffect(() => {
     if (mobileOpen) {
       setHidden(false);
+      lenis?.stop();
       document.body.style.overflow = 'hidden';
       return () => {
+        lenis?.start();
         document.body.style.overflow = '';
       };
     }
-  }, [mobileOpen]);
+  }, [mobileOpen, lenis]);
 
   return (
     <div className="min-h-screen bg-ink-950 relative">

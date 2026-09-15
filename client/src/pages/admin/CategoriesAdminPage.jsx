@@ -70,7 +70,7 @@ export default function CategoriesAdminPage() {
         </form>
       </Item>
 
-      <div className="space-y-2 overflow-auto max-h-[calc(100vh-15rem)] pr-1">
+      <div data-lenis-prevent className="space-y-2 overflow-auto max-h-[calc(100vh-15rem)] pr-1">
         {categories.map((cat) => (
           <Item key={cat.id} className="flex items-center justify-between p-4 bg-ink-900/30 border border-ink-800/30 rounded-sm">
             {editId === cat.id ? (

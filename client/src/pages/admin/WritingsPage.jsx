@@ -161,7 +161,7 @@ export default function WritingsPage() {
       )}
 
       {!loading && (
-        <div className="overflow-auto max-h-[calc(100vh-15rem)] border border-ink-800/30">
+        <div data-lenis-prevent className="overflow-auto max-h-[calc(100vh-15rem)] border border-ink-800/30">
           <Stagger delay={0.1}>
           <table className="admin-table">
             <thead>
