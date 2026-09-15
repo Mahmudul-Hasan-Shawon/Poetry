@@ -262,14 +262,14 @@ export default function PublicLayout() {
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-12 border-t border-ink-800/30 pt-16">
             <div>
-              <div className="flex items-center justify-center mb-5">
+              <div className="flex items-center justify-center md:justify-start mb-5">
                 <img
                   src="/Images/logo/logo.svg"
                   alt="The Poetry Archive"
                   className="h-12 w-auto object-contain"
                 />
               </div>
-              <p className="font-body text-sm text-ink-500 leading-relaxed max-w-xs mx-auto text-center">
+              <p className="font-body text-sm text-ink-500 leading-relaxed max-w-xs mx-auto md:mx-0 text-center md:text-left">
                 A quiet digital library of human thought. Poetry, wisdom, and writings from the world's greatest poets and thinkers.
               </p>
             </div>
