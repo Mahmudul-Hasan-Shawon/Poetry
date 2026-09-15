@@ -1,7 +1,6 @@
 import { Link, useLocation, Outlet } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { getLenis } from '../SmoothScroll';
 
 const navLinks = [
   { to: '/', label: 'Home' },
@@ -21,10 +20,16 @@ export default function PublicLayout() {
 
   // Reset scroll to top on navigation
   useEffect(() => {
-    const lenis = getLenis();
-    if (lenis) lenis.scrollTo(0, { immediate: true });
-    else window.scrollTo(0, 0);
+    window.scrollTo(0, 0);
   }, [location.pathname]);
+
+  const handleLogoClick = (e) => {
+    setMobileOpen(false);
+    if (location.pathname === '/') {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 20);
@@ -45,13 +50,14 @@ export default function PublicLayout() {
     <div className="min-h-screen bg-ink-950 relative">
       <div className="grain-overlay" />
 
-      <header
-        className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${
-          scrolled ? 'bg-ink-950/40 backdrop-blur-md' : 'bg-transparent'
-        }`}
-      >
+      <header className="fixed top-0 left-0 right-0 z-50">
+        <div
+          className={`absolute inset-0 -z-10 bg-ink-950/40 backdrop-blur-md transition-opacity duration-300 ${
+            scrolled ? 'opacity-100' : 'opacity-0'
+          }`}
+        />
         <nav className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-<Link to="/" className="flex items-center group">
+<Link to="/" onClick={handleLogoClick} className="flex items-center group">
               <img
                 src="/Images/logo/logo.svg"
                 alt="The Poetry Archive"
@@ -108,7 +114,7 @@ export default function PublicLayout() {
               animate={{ opacity: 1 }}
               exit={{ opacity: 0 }}
               transition={{ duration: 0.3 }}
-              className="fixed inset-0 z-40 md:hidden bg-ink-950/95 backdrop-blur-xl flex flex-col overflow-y-auto"
+              className="fixed inset-0 z-40 md:hidden bg-ink-950 flex flex-col overflow-y-auto"
             >
               <div className="flex-1 flex flex-col justify-center">
                 <div className="flex flex-col items-center gap-1 px-8">

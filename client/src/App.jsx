@@ -1,6 +1,5 @@
 import { Routes, Route, Navigate } from 'react-router-dom';
 import { useAuth } from './context/AuthContext';
-import SmoothScroll from './components/SmoothScroll';
 import PublicLayout from './components/layout/PublicLayout';
 import AdminLayout from './components/layout/AdminLayout';
 import HomePage from './pages/public/HomePage';
@@ -31,8 +30,7 @@ function ProtectedRoute({ children }) {
 
 export default function App() {
   return (
-    <SmoothScroll>
-      <Routes>
+    <Routes>
       <Route element={<PublicLayout />}>
         <Route path="/" element={<HomePage />} />
         <Route path="/explore" element={<ExplorePage />} />
@@ -71,6 +69,5 @@ export default function App() {
 
       <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
-    </SmoothScroll>
   );
 }

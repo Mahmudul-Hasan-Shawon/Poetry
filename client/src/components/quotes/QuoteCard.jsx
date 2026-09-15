@@ -120,7 +120,7 @@ export default function QuoteCard({ writing, index = 0 }) {
       >
         <button
           onClick={handleCopy}
-          className="p-2 rounded-sm bg-ink-900/90 text-ink-400 hover:text-gold-400 hover:bg-ink-700/90 transition-all backdrop-blur-sm border border-ink-700/50"
+          className="p-2 rounded-sm bg-ink-900/90 text-ink-400 hover:text-gold-400 hover:bg-ink-700/90 transition-all border border-ink-700/50"
           title="Copy"
         >
           {copied ? (
@@ -135,7 +135,7 @@ export default function QuoteCard({ writing, index = 0 }) {
         </button>
         <button
           onClick={handleShare}
-          className="p-2 rounded-sm bg-ink-900/90 text-ink-400 hover:text-gold-400 hover:bg-ink-700/90 transition-all backdrop-blur-sm border border-ink-700/50"
+          className="p-2 rounded-sm bg-ink-900/90 text-ink-400 hover:text-gold-400 hover:bg-ink-700/90 transition-all border border-ink-700/50"
           title="Share"
         >
           <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -144,7 +144,7 @@ export default function QuoteCard({ writing, index = 0 }) {
         </button>
         <button
           onClick={handleSave}
-          className={`p-2 rounded-sm transition-all backdrop-blur-sm border border-ink-700/50 ${
+          className={`p-2 rounded-sm transition-all border border-ink-700/50 ${
             saved
               ? 'bg-gold-500/15 text-gold-400 border-gold-500/40'
               : 'bg-ink-900/90 text-ink-400 hover:text-gold-400 hover:bg-ink-700/90'
