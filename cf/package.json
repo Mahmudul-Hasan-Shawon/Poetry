@@ -4,7 +4,8 @@
   "version": "1.0.0",
   "type": "module",
   "scripts": {
-    "deploy": "cd ../client && npm run build && cd ../cf && wrangler deploy",
+    "deploy": "cd ../client && npm run build && cd ../cf && npm run bundle:worker && npm run pages:deploy",
+    "pages:deploy": "node -e \"const fs=require('fs');fs.copyFileSync('worker-bundle/_worker.js','../client/dist/_worker.js')\" && wrangler pages deploy ../client/dist --project-name versevision --branch main",
     "bundle:worker": "esbuild src/index.js --bundle --format=esm --platform=browser --target=es2022 --minify --outfile=worker-bundle/_worker.js",
     "dev": "cd ../client && npm run build && cd ../cf && wrangler dev",
     "db:schema": "wrangler d1 execute poetry --file=schema.sql",
