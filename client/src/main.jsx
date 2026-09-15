@@ -5,7 +5,6 @@ import { HelmetProvider } from 'react-helmet-async'
 import App from './App'
 import { AuthProvider } from './context/AuthContext'
 import { FavoritesProvider } from './context/FavoritesContext'
-import '@fontsource-variable/anek-bangla'
 import './index.css'
 
 ReactDOM.createRoot(document.getElementById('root')).render(
