@@ -8,6 +8,7 @@ const navLinks = [
   { to: '/explore', label: 'Explore' },
   { to: '/authors', label: 'Authors' },
   { to: '/collections', label: 'Collections' },
+  { to: '/about', label: 'About' },
 ];
 
 export default function PublicLayout() {

@@ -10,6 +10,7 @@ import QuotePage from './pages/public/QuotePage';
 import CollectionPage from './pages/public/CollectionPage';
 import CollectionsPage from './pages/public/CollectionsPage';
 import SearchPage from './pages/public/SearchPage';
+import AboutPage from './pages/public/AboutPage';
 import LoginPage from './pages/admin/LoginPage';
 import DashboardPage from './pages/admin/DashboardPage';
 import WritingsPage from './pages/admin/WritingsPage';
@@ -40,6 +41,7 @@ export default function App() {
         <Route path="/collections" element={<CollectionsPage />} />
         <Route path="/collections/:slug" element={<CollectionPage />} />
         <Route path="/search" element={<SearchPage />} />
+        <Route path="/about" element={<AboutPage />} />
       </Route>
 
       <Route path="/admin/login" element={<LoginPage />} />
