@@ -48,10 +48,10 @@ export default {
         },
       },
       fontFamily: {
-        display: ['"Cormorant Garamond"', '"Hind Siliguri"', 'Georgia', 'serif'],
-        body: ['"Inter"', '"Hind Siliguri"', 'system-ui', 'sans-serif'],
-        serif: ['"Libre Baskerville"', '"Hind Siliguri"', 'Georgia', 'serif'],
-        bangla: ['"Hind Siliguri"', '"Cormorant Garamond"', 'Georgia', 'serif'],
+        display: ['"Cormorant Garamond"', '"Anek Bangla Variable"', 'Georgia', 'serif'],
+        body: ['"Inter"', '"Anek Bangla Variable"', 'system-ui', 'sans-serif'],
+        serif: ['"Libre Baskerville"', '"Anek Bangla Variable"', 'Georgia', 'serif'],
+        bangla: ['"Anek Bangla Variable"', '"Cormorant Garamond"', 'Georgia', 'serif'],
       },
       typography: {
         DEFAULT: {
