@@ -25,7 +25,7 @@
   }
 
   .lenis.lenis-stopped {
-    overflow: hidden;
+    overflow-y: scroll;
   }
 
   body {
