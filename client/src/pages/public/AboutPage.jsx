@@ -7,7 +7,7 @@ const processSteps = [
   {
     step: '01',
     title: 'Kept carefully',
-    body: 'Every writing is verified, attributed and organized — by author, language, category and collection. Nothing lost to a chat history or a camera roll.',
+    body: 'Every writing is verified, attributed and organized by author, language, category and collection. Nothing lost to a chat history or a camera roll.',
   },
   {
     step: '02',
@@ -17,7 +17,7 @@ const processSteps = [
   {
     step: '03',
     title: 'Read slowly',
-    body: 'A quiet, focused reading experience. No noise, no clutter — just the writing, the author and the moment it was meant for.',
+    body: 'A quiet, focused reading experience. No noise, no clutter, just the writing, the author and the moment it was meant for.',
   },
   {
     step: '04',
@@ -81,46 +81,30 @@ export default function AboutPage() {
               transition={{ duration: 0.55, ease: EASE }}
               className="font-display text-xl md:text-2xl font-light text-ink-100 leading-relaxed mb-8"
             >
-              I love to read — poetry, verses and quotes most of all. The ones that move me always find me on social media: a line shared on Facebook or Instagram at just the right moment, saved somewhere and meant to be kept.
+              I have always loved reading, especially poetry, verses, and quotes that make me pause and think.
             </motion.p>
 
             <motion.div
               initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.08, ease: EASE }}
+              transition={{ duration: 0.55, delay: 0.14, ease: EASE }}
               className="space-y-5 mb-12"
             >
               <p className="font-body text-base text-ink-400 leading-relaxed">
-                For years I collected the writings that inspired me — adding them to notes, taking screenshots, saving links. But I rarely went back to them. Everything was scattered across chat threads, folders and camera rolls; a huge, messy pile of words I loved but never actually read again.
+                Whenever I come across something that inspires me on Facebook, Instagram, or other social platforms, I usually save it in my notes or take a screenshot, thinking that I'll come back to it someday.
               </p>
               <p className="font-body text-base text-ink-400 leading-relaxed">
-                So I decided to build something quiet and orderly — a single home where poetry, verses and wisdom could be kept carefully, found easily and read slowly. A place that treats the words I love the way they deserve to be treated: kept, preserved and shared. This archive is that place.
+                But, over time, those notes and screenshots became a huge, messy collection. The things I loved slowly got buried beneath everything else, and most of the time, I never opened them again.
               </p>
               <p className="font-body text-base text-ink-400 leading-relaxed">
-                But this is also dedicated to a friend — Noushad. He is one of the most versatile and talented people I know, and he writes beautifully. He used to send me his writing through social media and I kept every piece, the way you keep things that matter. Over time those words got lost inside endless chat history. This archive exists so they never get lost again.
+                That made me think: what if there were a simple, beautiful place where I could keep all the words that mean something to me? So, I decided to create this. It is not just a collection of poetry and quotes. It is a personal archive of words that have inspired me, touched me, or stayed with me for some reason. A place where meaningful words don't have to disappear into a crowded notes app, a forgotten screenshot folder, or an old social-media post.
               </p>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.55, delay: 0.14, ease: EASE }}
-              className="mb-12"
-            >
-              <h2 className="font-display text-2xl text-ink-100 mb-6">What this archive is</h2>
-              <ol className="space-y-6">
-                {processSteps.map((s, i) => (
-                  <li key={s.step} className="flex gap-5">
-                    <span className="font-display text-lg text-gold-500/70 w-10 flex-shrink-0">
-                      {s.step}
-                    </span>
-                    <div>
-                      <p className="font-display text-base text-ink-100 mb-1">{s.title}</p>
-                      <p className="font-body text-sm text-ink-400 leading-relaxed">{s.body}</p>
-                    </div>
-                  </li>
-                ))}
-              </ol>
+              <p className="font-body text-base text-ink-400 leading-relaxed">
+                There is another personal reason behind this project too. One of my closest friends, Noushad, is an incredibly versatile and talented person. He writes beautifully, and over the years, he has shared many of his writings with me through social media and chat. I saved many of them because I genuinely loved reading them. But, like everything else, they slowly became lost among our old conversations and countless messages.
+              </p>
+              <p className="font-body text-base text-ink-400 leading-relaxed">
+                So, in a small way, this project is also dedicated to him. Perhaps this is what I wanted all along, a quiet place for words worth remembering. Words that inspire. Words that comfort. Words that make us think. Because some words deserve more than a screenshot. They deserve a place to stay.
+              </p>
             </motion.div>
 
             <motion.blockquote
@@ -132,7 +116,7 @@ export default function AboutPage() {
               <p className="font-display text-xl md:text-2xl font-light text-ink-100 leading-relaxed">
                 A line of poetry, kept and revisited, becomes a friend you can lean on.
               </p>
-              <cite className="font-body text-sm text-gold-500/70 not-italic mt-3 block">Shawon</cite>
+              <cite className="font-body text-sm text-gold-500/70 not-italic mt-3 block">— Shawon</cite>
             </motion.blockquote>
 
             <motion.div

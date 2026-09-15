@@ -154,7 +154,7 @@ export default function VeilTransition({ children }) {
         <img
           src="/Images/logo/logo.svg"
           alt=""
-          className="h-12 w-auto object-contain opacity-90"
+          className="h-20 w-auto object-contain opacity-90"
         />
       </div>
     </VeilContext.Provider>

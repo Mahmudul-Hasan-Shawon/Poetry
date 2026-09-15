@@ -273,7 +273,7 @@ export default function PublicLayout() {
                 <img
                   src="/Images/logo/logo.svg"
                   alt="The Poetry Archive"
-                  className="h-12 w-auto object-contain"
+                  className="h-20 w-auto object-contain"
                 />
               </div>
               <p className="font-body text-sm text-ink-500 leading-relaxed max-w-xs mx-auto md:mx-0 text-center md:text-left">
@@ -306,7 +306,7 @@ export default function PublicLayout() {
               <div>
                 <h3 className="font-body text-xs uppercase tracking-widest text-gold-500 mb-5">About</h3>
                 <p className="font-body text-sm text-ink-500 leading-relaxed">
-                  Dedicated to preserving the timeless words of poets, philosophers, and thinkers across cultures and centuries — a home for quiet reflection and enduring verse.
+                  Dedicated to preserving the timeless words of poets, philosophers, and thinkers across cultures and centuries, a home for quiet reflection and enduring verse.
                 </p>
                 <div className="flex items-center gap-2 mt-5">
                   <svg className="w-4 h-4 text-gold-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
