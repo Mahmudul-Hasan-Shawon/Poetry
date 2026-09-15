@@ -180,20 +180,6 @@ export default function PublicLayout() {
               </div>
 
               <div className="mt-10 space-y-7 pb-10 px-8">
-                <div className="flex flex-col items-center gap-2.5">
-                  <a
-                    href="mailto:info@thepoetryarchive.com"
-                    className="inline-flex items-center gap-2.5 text-sm text-ink-400 hover:text-ink-100 transition-colors duration-300 w-fit"
-                  >
-                    <i className="fa-regular fa-envelope text-gold-500/80" aria-hidden="true"></i>
-                    info@thepoetryarchive.com
-                  </a>
-                  <div className="inline-flex items-center gap-2.5 text-sm text-ink-400 w-fit">
-                    <i className="fa-solid fa-location-dot text-gold-500/80" aria-hidden="true"></i>
-                    Dhaka, Bangladesh
-                  </div>
-                </div>
-
                 <div className="flex flex-col items-center gap-4 border-t border-ink-800 pt-6">
                   <div className="flex gap-2.5">
                     <a
@@ -233,17 +219,15 @@ export default function PublicLayout() {
                   </div>
                 </div>
 
-                <div className="flex flex-wrap items-center justify-center gap-x-4 gap-y-1.5">
-                  <span className="text-[11px] uppercase tracking-[0.08em] text-ink-500 hover:text-ink-200 cursor-pointer transition-colors duration-300">
-                    Privacy Policy
-                  </span>
-                  <span className="text-[11px] uppercase tracking-[0.08em] text-ink-500 hover:text-ink-200 cursor-pointer transition-colors duration-300">
-                    Terms of Service
-                  </span>
-                  <span className="text-[11px] uppercase tracking-[0.08em] text-ink-500 hover:text-ink-200 cursor-pointer transition-colors duration-300">
-                    Cookie Policy
-                  </span>
-                  <span className="text-ink-600 text-xs">© 2026 Shawon</span>
+                <div className="flex flex-col items-center gap-2.5">
+                  <div className="inline-flex items-center gap-2.5 text-sm text-ink-400 w-fit">
+                    <i className="fa-solid fa-location-dot text-gold-500/80" aria-hidden="true"></i>
+                    Dhaka, Bangladesh
+                  </div>
+                </div>
+
+                <div className="flex flex-col items-center justify-center gap-y-2">
+                  <span className="text-ink-600 text-xs">© 2026 — Shawon. All rights reserved.</span>
                   <span className="text-ink-500 text-xs flex items-center gap-1.5">
                     Powered by
                     <a href="https://mhshan.pages.dev/" target="_blank" rel="noopener" className="inline-flex items-center hover:opacity-80 transition-opacity">

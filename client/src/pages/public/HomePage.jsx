@@ -126,17 +126,6 @@ export default function HomePage() {
             </motion.div>
           )}
         </div>
-
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2">
-          <motion.div
-            animate={{ y: [0, 8, 0] }}
-            transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
-          >
-            <svg className="w-5 h-5 text-ink-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M19 14l-7 7m0 0l-7-7m7 7V3" />
-            </svg>
-          </motion.div>
-        </div>
       </section>
 
       {/* Word of the Day */}
@@ -155,9 +144,9 @@ export default function HomePage() {
               </span>
 
               <blockquote className={`${daily.language === 'bangla' ? 'font-bangla' : 'font-display'} text-2xl md:text-4xl lg:text-5xl font-light leading-relaxed text-ink-100 mb-8 ${daily.direction === 'rtl' ? 'writing-rtl' : ''}`}>
-                <span className="text-gold-500/30 text-6xl">"</span>
+                <span className="text-gold-500/30 text-4xl sm:text-6xl">"</span>
                 <span className="whitespace-pre-line">{daily.text}</span>
-                <span className="text-gold-500/30 text-6xl">"</span>
+                <span className="text-gold-500/30 text-4xl sm:text-6xl">"</span>
               </blockquote>
 
               <div className="flex items-center justify-center gap-3">
