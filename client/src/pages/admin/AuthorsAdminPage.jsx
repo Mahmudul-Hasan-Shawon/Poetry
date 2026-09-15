@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { apiAuthors } from '../../api/client';
 import { Stagger, Item } from '../../components/ui/motion.jsx';
+import { languageLabel } from '../../utils/helpers';
 
 export default function AuthorsAdminPage() {
   const [authors, setAuthors] = useState([]);
@@ -66,7 +67,7 @@ export default function AuthorsAdminPage() {
                   </div>
                 </td>
                 <td className="text-ink-400">{author.country || '—'}</td>
-                <td className="text-ink-400">{author.primary_language || '—'}</td>
+                <td className="text-ink-400">{languageLabel(author.primary_language)}</td>
                 <td className="text-ink-400">{author.writing_count}</td>
                 <td>
                   <div className="flex items-center gap-3">

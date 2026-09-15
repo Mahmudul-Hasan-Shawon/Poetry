@@ -114,7 +114,7 @@ export const WRITING_TYPES = [
 
 export const LANGUAGES = [
   { value: 'english', label: 'English' },
-  { value: 'bangla', label: 'Bangla' },
+  { value: 'bangla', label: 'Bengali' },
   { value: 'urdu', label: 'Urdu' },
   { value: 'persian', label: 'Persian' },
   { value: 'arabic', label: 'Arabic' },
@@ -124,6 +124,12 @@ export const LANGUAGES = [
   { value: 'turkish', label: 'Turkish' },
   { value: 'german', label: 'German' },
 ];
+
+export function languageLabel(value) {
+  if (!value) return '—';
+  const lang = LANGUAGES.find((l) => l.value === value);
+  return lang ? lang.label : value;
+}
 
 export const STATUSES = [
   { value: 'draft', label: 'Draft' },

@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react';
 import { Link, useSearchParams } from 'react-router-dom';
 import { apiWritings, apiAuthors } from '../../api/client';
 import Pagination from '../../components/ui/Pagination';
-import { debounce, formatShortDate, capitalizeFirst } from '../../utils/helpers';
+import { debounce, formatShortDate, capitalizeFirst, LANGUAGES } from '../../utils/helpers';
 import { Stagger, Item } from '../../components/ui/motion.jsx';
 
 export default function WritingsPage() {
@@ -13,6 +13,7 @@ export default function WritingsPage() {
   const [search, setSearch] = useState('');
   const [statusFilter, setStatusFilter] = useState('');
   const [typeFilter, setTypeFilter] = useState('');
+  const [languageFilter, setLanguageFilter] = useState('');
   const [selected, setSelected] = useState([]);
   const [searchParams] = useSearchParams();
   const currentPage = parseInt(searchParams.get('page') || '1');
@@ -28,12 +29,13 @@ export default function WritingsPage() {
       if (search) params.search = search;
       if (statusFilter) params.status = statusFilter;
       if (typeFilter) params.type = typeFilter;
+      if (languageFilter) params.language = languageFilter;
       const data = await apiWritings.admin.list(params);
       setWritings(data.writings);
       setPagination(data.pagination);
     } catch {}
     setLoading(false);
-  }, [search, statusFilter, typeFilter, currentPage]);
+  }, [search, statusFilter, typeFilter, languageFilter, currentPage]);
 
   useEffect(() => { loadWritings(); }, [loadWritings]);
 
@@ -138,6 +140,12 @@ export default function WritingsPage() {
           <option value="reflection">Reflection</option>
           <option value="letter">Letter</option>
         </select>
+        <select value={languageFilter} onChange={(e) => setLanguageFilter(e.target.value)} className="select-field max-w-[150px]">
+          <option value="">All Languages</option>
+          {LANGUAGES.map((l) => (
+            <option key={l.value} value={l.value}>{l.label}</option>
+          ))}
+        </select>
       </Item>
 
       {/* Bulk actions */}
@@ -190,17 +198,25 @@ export default function WritingsPage() {
                       onClick={() => handleToggleFeatured(w.id)}
                       className={`transition-colors ${w.featured ? 'text-gold-400' : 'text-ink-600 hover:text-gold-400'}`}
                     >
-                      {w.featured ? '★' : '☆'}
+                      {w.featured ? <i className="fa-solid fa-star text-gold-400" aria-hidden="true"></i> : <i className="fa-regular fa-star" aria-hidden="true"></i>}
                     </button>
                   </td>
                   <td className="text-ink-500 text-xs">{formatShortDate(w.created_at)}</td>
                   <td>
-                    <div className="flex items-center gap-2">
-                      <Link to={`/admin/writings/${w.id}/edit`} className="text-ink-400 hover:text-gold-400 text-xs transition-colors">Edit</Link>
-                      <button onClick={() => handleDuplicate(w.id)} className="text-ink-400 hover:text-gold-400 text-xs transition-colors">Dup</button>
-                      <button onClick={() => handleSetDaily(w.id)} className="text-ink-400 hover:text-gold-400 text-xs transition-colors">Daily</button>
-                      <button onClick={() => handleDelete(w.id)} className="text-ink-400 hover:text-red-400 text-xs transition-colors">Del</button>
-                    </div>
+<div className="flex items-center gap-2">
+  <Link to={`/admin/writings/${w.id}/edit`} className="text-ink-400 hover:text-gold-400 transition-colors" title="Edit" aria-label={`Edit ${w.title || 'writing'}`}>
+    <i className="fa-solid fa-pen-to-square" aria-hidden="true"></i>
+  </Link>
+  <button onClick={() => handleDuplicate(w.id)} className="text-ink-400 hover:text-gold-400 transition-colors" title="Duplicate" aria-label={`Duplicate ${w.title || 'writing'}`}>
+    <i className="fa-solid fa-copy" aria-hidden="true"></i>
+  </button>
+  <button onClick={() => handleSetDaily(w.id)} className="text-ink-400 hover:text-gold-400 transition-colors" title="Set as Daily" aria-label={`Set ${w.title || 'writing'} as daily`}>
+    <i className="fa-solid fa-calendar-day" aria-hidden="true"></i>
+  </button>
+  <button onClick={() => handleDelete(w.id)} className="text-ink-400 hover:text-red-400 transition-colors" title="Delete" aria-label={`Delete ${w.title || 'writing'}`}>
+    <i className="fa-solid fa-trash-can" aria-hidden="true"></i>
+  </button>
+</div>
                   </td>
                 </Item>
               ))}

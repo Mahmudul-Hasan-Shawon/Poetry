@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { apiAuthors } from '../../api/client';
 import QuoteCard from '../../components/quotes/QuoteCard';
 import { Skeleton, QuoteCardSkeleton } from '../../components/ui/Skeletons';
+import { languageLabel } from '../../utils/helpers';
 
 export default function AuthorPage() {
   const { slug } = useParams();
@@ -75,7 +76,7 @@ export default function AuthorPage() {
             {author.primary_language && (
               <>
                 <span className="text-ink-700">·</span>
-                <span className="font-body text-xs text-ink-500">{author.primary_language}</span>
+                <span className="font-body text-xs text-ink-500">{languageLabel(author.primary_language)}</span>
               </>
             )}
           </div>

@@ -96,7 +96,7 @@ export default function ExplorePage() {
   const languages = [
     { value: '', label: 'All Languages' },
     { value: 'english', label: 'English' },
-    { value: 'bangla', label: 'Bangla' },
+    { value: 'bangla', label: 'Bengali' },
     { value: 'urdu', label: 'Urdu' },
     { value: 'persian', label: 'Persian' },
     { value: 'arabic', label: 'Arabic' },
