@@ -22,6 +22,7 @@ import CollectionsAdminPage from './pages/admin/CollectionsAdminPage';
 import CollectionFormPage from './pages/admin/CollectionFormPage';
 import ImportExportPage from './pages/admin/ImportExportPage';
 import ChangePasswordPage from './pages/admin/ChangePasswordPage';
+import { TYPE_ROUTES } from './utils/helpers';
 
 function ProtectedRoute({ children }) {
   const { isAdmin, loading } = useAuth();
@@ -37,7 +38,9 @@ export default function App() {
         <Route path="/explore" element={<ExplorePage />} />
         <Route path="/authors" element={<AuthorsPage />} />
         <Route path="/authors/:slug" element={<AuthorPage />} />
-        <Route path="/quotes/:slug" element={<QuotePage />} />
+        {Object.entries(TYPE_ROUTES).map(([type, path]) => (
+          <Route key={type} path={`/${path}/:slug`} element={<QuotePage />} />
+        ))}
         <Route path="/collections" element={<CollectionsPage />} />
         <Route path="/collections/:slug" element={<CollectionPage />} />
         <Route path="/search" element={<SearchPage />} />

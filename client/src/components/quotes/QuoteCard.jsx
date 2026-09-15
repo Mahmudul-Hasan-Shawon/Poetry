@@ -1,7 +1,7 @@
 import { useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { copyToClipboard } from '../../utils/helpers';
+import { copyToClipboard, writingUrl } from '../../utils/helpers';
 import { useFavorites } from '../../context/FavoritesContext';
 
 export default function QuoteCard({ writing, index = 0 }) {
@@ -54,7 +54,7 @@ export default function QuoteCard({ writing, index = 0 }) {
       onMouseEnter={() => setShowActions(true)}
       onMouseLeave={() => setShowActions(false)}
     >
-      <Link to={`/quotes/${writing.slug}`} className="block h-full">
+      <Link to={writingUrl(writing)} className="block h-full">
         <div className="relative flex flex-col h-full p-7 bg-ink-900/40 border border-ink-800/30 rounded-sm card-hover overflow-hidden">
           <div className="absolute top-0 left-0 w-[2px] h-full bg-gradient-to-b from-gold-500/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 

@@ -126,6 +126,23 @@ export const LANGUAGES = [
   { value: 'german', label: 'German' },
 ];
 
+export const TYPE_ROUTES = {
+  quote: 'quotes',
+  poetry: 'poetry',
+  poem: 'poems',
+  verse: 'verses',
+  ghazal: 'ghazals',
+  proverb: 'proverbs',
+  wisdom: 'wisdom',
+  reflection: 'reflections',
+  letter: 'letters',
+};
+
+export function writingUrl(writing) {
+  const prefix = TYPE_ROUTES[writing?.type] || 'quotes';
+  return `/${prefix}/${writing.slug}`;
+}
+
 export function languageLabel(value) {
   if (!value) return '—';
   const lang = LANGUAGES.find((l) => l.value === value);

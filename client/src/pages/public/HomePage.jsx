@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { apiWritings, apiAuthors } from '../../api/client';
 import QuoteCard from '../../components/quotes/QuoteCard';
+import { writingUrl } from '../../utils/helpers';
 
 export default function HomePage() {
   const [daily, setDaily] = useState(null);
@@ -164,7 +165,7 @@ export default function HomePage() {
               )}
 
               <div className="mt-8">
-                <Link to={`/quotes/${daily.slug}`} className="btn-ghost text-gold-500/60 hover:text-gold-400">
+                <Link to={writingUrl(daily)} className="btn-ghost text-gold-500/60 hover:text-gold-400">
                   Read in full →
                 </Link>
               </div>
