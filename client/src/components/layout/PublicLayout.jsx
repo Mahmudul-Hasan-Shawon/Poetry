@@ -1,5 +1,5 @@
 import { Link, useLocation, Outlet } from 'react-router-dom';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const navLinks = [
@@ -11,6 +11,7 @@ const navLinks = [
 
 export default function PublicLayout() {
   const [scrolled, setScrolled] = useState(false);
+  const [hidden, setHidden] = useState(false);
   const [mobileOpen, setMobileOpen] = useState(false);
   const location = useLocation();
 
@@ -31,14 +32,27 @@ export default function PublicLayout() {
     }
   };
 
+  const lastScrollY = useRef(0);
+
   useEffect(() => {
-    const handleScroll = () => setScrolled(window.scrollY > 20);
-    window.addEventListener('scroll', handleScroll);
+    const handleScroll = () => {
+      const currentY = window.scrollY;
+      setScrolled(currentY > 20);
+
+      if (currentY > 120 && currentY > lastScrollY.current && !mobileOpen) {
+        setHidden(true);
+      } else if (currentY < lastScrollY.current || currentY <= 120) {
+        setHidden(false);
+      }
+      lastScrollY.current = currentY;
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
     return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  }, [mobileOpen]);
 
   useEffect(() => {
     if (mobileOpen) {
+      setHidden(false);
       document.body.style.overflow = 'hidden';
       return () => {
         document.body.style.overflow = '';
@@ -50,7 +64,11 @@ export default function PublicLayout() {
     <div className="min-h-screen bg-ink-950 relative">
       <div className="grain-overlay" />
 
-      <header className="fixed top-0 left-0 right-0 z-50">
+      <header
+        className={`fixed top-0 left-0 right-0 z-50 transition-transform duration-300 ease-in-out ${
+          hidden ? '-translate-y-full' : 'translate-y-0'
+        }`}
+      >
         <div
           className={`absolute inset-0 -z-10 bg-ink-950/40 backdrop-blur-md transition-opacity duration-300 ${
             scrolled ? 'opacity-100' : 'opacity-0'
