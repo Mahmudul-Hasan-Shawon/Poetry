@@ -110,7 +110,7 @@ export default function HomePage() {
               className="mt-12 max-w-xl mx-auto"
             >
               <div className="p-8 bg-ink-900/40 border border-ink-800/30 rounded-sm">
-                <p className={`${randomWriting.language === 'bangla' ? 'font-bangla' : 'font-display'} text-xl md:text-2xl italic text-ink-200 leading-relaxed mb-4 whitespace-pre-line`}>
+                <p className={`${randomWriting.language === 'bangla' ? 'font-bangla' : 'font-display'} text-xl md:text-[1.35rem] leading-relaxed text-ink-100 italic whitespace-pre-line line-clamp-6`}>
                   {randomWriting.text}
                 </p>
                 <p className="font-body text-sm text-gold-400">
