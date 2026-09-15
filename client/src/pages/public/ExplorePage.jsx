@@ -85,6 +85,7 @@ export default function ExplorePage() {
   const types = [
     { value: 'quote', label: 'Quotes' },
     { value: 'poetry', label: 'Poetry' },
+    { value: 'poem', label: 'Poems' },
     { value: 'verse', label: 'Verses' },
     { value: 'ghazal', label: 'Ghazals' },
     { value: 'proverb', label: 'Proverbs' },

@@ -104,6 +104,7 @@ export function getInitials(name) {
 export const WRITING_TYPES = [
   { value: 'quote', label: 'Quote' },
   { value: 'poetry', label: 'Poetry' },
+  { value: 'poem', label: 'Poem' },
   { value: 'verse', label: 'Verse' },
   { value: 'ghazal', label: 'Ghazal' },
   { value: 'proverb', label: 'Proverb' },
